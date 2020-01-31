@@ -1,0 +1,8 @@
+app:
+  image: pantsel/konga
+  ports:
+    - 1337:1337
+  environment: 
+    NO_AUTH: 'true'
+    NODE_TLS_REJECT_UNAUTHORIZED: '0'
+    NODE_ENV: production
