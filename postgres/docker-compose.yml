@@ -3,6 +3,6 @@ app:
     ports:
       - 5432:5432
     volumes:
-        - ./data:/var/lib/postgresql/data postgres
+        - ./data:/var/lib/postgresql/data
     environment: 
         POSTGRES_PASSWORD: postgres
