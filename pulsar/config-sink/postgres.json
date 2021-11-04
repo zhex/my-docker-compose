@@ -1,0 +1,6 @@
+{
+    "userName": "mx",
+    "password": "!Dev_123!",
+    "jdbcUrl": "jdbc:postgresql://mx-api-dev-aurora-cluster.cluster-ck7vcovpf5uk.ap-southeast-2.rds.amazonaws.com:5432/subquery_dev",
+    "tableName": "test_events"
+}

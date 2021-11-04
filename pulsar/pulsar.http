@@ -1,0 +1,20 @@
+@host = http://ac94ab68af8b44e06b4c85dc5368b8d4-1736238562.ap-southeast-2.elb.amazonaws.com/admin
+@tenant = public
+@namespace = default
+@fnName = test-fn
+
+### function list
+GET {{host}}/v3/functions/{{tenant}}/{{namespace}}
+
+### function info
+GET {{host}}/v3/functions/{{tenant}}/{{namespace}}/{{fnName}}
+
+### function instances
+GET {{host}}/v3/functions/{{tenant}}/{{namespace}}/{{fnName}}/status
+
+### delete function
+DELETE {{host}}/v3/functions/{{tenant}}/{{namespace}}/{{fnName}}
+
+
+### get package list
+GET {{host}}/v3/packages/function/{{tenant}}/{{namespace}}

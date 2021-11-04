@@ -1,6 +1,13 @@
 version: '2'
 
 services:
+  # proxy:
+    # image: flant/redis-sentinel-proxy
+    # ports:
+    #   - 9999:9999
+    # command: -listen :9999 -master mymaster -sentinel redis-sentinel:26379
+    # depends_on:
+    #   - redis-sentinel
   redis-sentinel:
     image: docker.io/bitnami/redis-sentinel:6.0-debian-10
     volumes:

@@ -1,0 +1,13 @@
+app:
+    image: kong
+    ports:
+        - 8000:8000
+        - 8001:8001
+    environment: 
+        KONG_DATABASE: postgres
+        KONG_PG_HOST: docker.for.mac.localhost
+        KONG_PG_DATABASE: kong
+        KONG_PG_USER: postgres
+        KONG_PG_PASSWORD: postgres
+        KONG_ADMIN_LISTEN: 0.0.0.0:8001
+    # command: kong migrations bootstrap

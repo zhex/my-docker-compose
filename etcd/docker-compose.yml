@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    image: quay.io/coreos/etcd:v3.3
+    environment:
+      ETCD_ADVERTISE_CLIENT_URLS: "http://0.0.0.0:2379"
+      ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
+      ETCDCTL_API: "2"
+    ports:
+    - 2379:2379
+    - 2380:2380
+    - 4001:4001
+    
+  ui:
+    image: evildecay/etcdkeeper:v0.7.6
+    ports:
+      - 8080:8080
+    depends_on:
+      - app
+

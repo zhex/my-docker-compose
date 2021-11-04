@@ -1,0 +1,98 @@
+namespace: pulsar
+namespaceCreate: true
+
+initialize: true
+
+components:
+  toolset: false
+
+monitoring:
+  prometheus: false
+  grafana: false
+  alert_manager: false
+  
+
+auth:
+  authentication:
+    enabled: true
+    provider: "jwt"
+    jwt:
+      usingSecretKey: true
+  authorization:
+    enabled: true
+  superUsers:
+    broker: "broker-admin"
+    proxy: "proxy-admin"
+    client: "admin"
+
+# images:
+  # zookeeper:
+  #   tag: 2.8.0
+  # bookie:
+  #   tag: 2.8.0
+  # autorecovery:
+  #   tag: 2.8.0
+  # broker:
+  #   tag: 2.8.0
+  # proxy:
+  #   tag: 2.8.0
+  # functions:
+  #   tag: 2.8.0
+  pulsar_manager:
+    tag: v0.2.0
+
+# broker:
+#   configData:
+#     managedLedgerOffloadDriver: aws-s3
+#     AWS_ACCESS_KEY_ID:
+#     AWS_SECRET_ACCESS_KEY:
+
+
+zookeeper:
+  volumes:
+    persistence: true
+    data:
+      name: data
+      size: 5Gi
+      local_storage: false
+      storageClassName: gp2
+
+bookkeeper:
+  replicaCount: 3
+  volumes:
+    persistence: true
+    journal:
+      name: journal
+      size: 10Gi
+      local_storage: false
+      storageClassName: gp2
+    ledgers:
+      name: ledgers
+      size: 50Gi
+      local_storage: false
+      storageClassName: gp2
+
+proxy:
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx-internal
+      route53: "true"
+    hostname: pulsar.mx-dev.internal
+    ports:
+      http: 6650
+
+pulsar_manager:
+  configData:
+    JWT_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiJ9.irXrbsopBLwTXlwN3pMm1FZGG7zz3DI7AuwePKGpCWM
+    SECRET_KEY: GbSMM6+ekIbnI1mtY94gYCmZ4AJiL9NWwFm6vffwNBM=
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx-internal
+      route53: "true"
+    hostname: pulsar-manager.mx-dev.internal
